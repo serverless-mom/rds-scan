@@ -1,0 +1,100 @@
+{
+  "nodes": [
+    {
+      "id": "daeabc63",
+      "type": "function",
+      "name": "Hello!",
+      "outputs": 1,
+      "memorySize": 128,
+      "timeout": 30,
+      "runtime": "nodejs8",
+      "location": "inline",
+      "noerr": true,
+      "x": 400,
+      "y": 185,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "98a8f1dd",
+      "type": "function",
+      "name": "Echo",
+      "outputs": 1,
+      "memorySize": 128,
+      "timeout": 30,
+      "runtime": "nodejs8",
+      "location": "inline",
+      "noerr": true,
+      "x": 400,
+      "y": 285,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "4884a038",
+      "type": "http",
+      "x": 197.5,
+      "y": 235,
+      "width": 185,
+      "height": 260
+    },
+    {
+      "id": "395b2a7a",
+      "type": "restApiEndpoint",
+      "x": 185,
+      "y": 185,
+      "name": "",
+      "path": "/",
+      "method": "GET",
+      "wires": [
+        [
+          "daeabc63"
+        ]
+      ]
+    },
+    {
+      "id": "610d30ec",
+      "type": "restApiEndpoint",
+      "x": 195,
+      "y": 285,
+      "name": "",
+      "path": "/{message}",
+      "method": "GET",
+      "wires": [
+        [
+          "98a8f1dd"
+        ]
+      ]
+    },
+    {
+      "id": "6f12a272",
+      "type": "errors",
+      "x": 200,
+      "y": 400,
+      "wires": [
+        [
+          "328cb934"
+        ]
+      ]
+    },
+    {
+      "id": "328cb934",
+      "type": "function",
+      "x": 410,
+      "y": 400,
+      "name": "LogErrors",
+      "outputs": 1,
+      "memorySize": 3008,
+      "timeout": 30,
+      "runtime": "nodejs8",
+      "location": "inline",
+      "envVars": {},
+      "entryPoint": "",
+      "wires": [
+        []
+      ]
+    }
+  ]
+}
