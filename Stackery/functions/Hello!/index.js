@@ -1,25 +1,12 @@
-module.exports = async request => {
-  // Log the request to the console.
-  console.log('Request:');
-  console.dir(request);
+var aws = require('aws-sdk');
+var dynamodb = new aws.DynamoDB();
+// Update the Table name below
+var tablename = process.env.TABLE_NAME ;
 
-  let responseBody = `
-    <html>
-      <body>
-        <h4>Woot!</h4>
-        <p>Try this: <a href="hi">hi</a>. It will echo "hi" back to you!</p>
-      </body>
-    </html>
-  `;
 
-  // Build an HTTP response.
-  let response = {
-    statusCode: 200,
-    headers: {
-      "Content-Type": "text/html"
-    },
-    body: responseBody
-  };
 
-  return response;
+exports.scandb = (event, context, callback) => {
+    dynamodb.scan({TableName: tablename}, (err, data) => {
+        callback(null, data['Items']);
+    });
 };
